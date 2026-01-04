@@ -1,0 +1,36 @@
+<canvas id="c"></canvas>
+<script>
+const canvas = document.getElementById("c");
+const ctx = canvas.getContext("2d");
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+function lightning() {
+  let x = Math.random() * canvas.width;
+  let y = 0;
+
+  ctx.beginPath();
+  ctx.moveTo(x, y);
+
+  while (y < canvas.height) {
+    x += (Math.random() - 0.5) * 30;
+    y += Math.random() * 30;
+    ctx.lineTo(x, y);
+  }
+
+  ctx.strokeStyle = "rgba(173,216,230,0.8)";
+  ctx.lineWidth = 2;
+  ctx.stroke();
+}
+
+function animate() {
+  ctx.fillStyle = "rgba(0,0,0,0.1)";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  if (Math.random() < 0.05) lightning();
+
+  requestAnimationFrame(animate);
+}
+
+animate();
+</script>
